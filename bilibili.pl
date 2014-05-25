@@ -43,7 +43,6 @@ if ( $ARGV[0] ){
         
         my $download = "http://interface.bilibili.cn/playurl?otype=json&quality=3&appkey=0a99fa1d87fdd38c&platform=ios&cid=";
         $download .= ${${$cidJSON}{list}}{0}->{cid};
-		print "$download\n\n";
         print " Getting download link for\n\033[32m   ",$cidJSON->{"title"},"\n     \033[0m\033[37m",$cidJSON->{"description"},"\033[0m\n";
         #获取下载链接
 		
@@ -64,14 +63,12 @@ if ( $ARGV[0] ){
                		push @downloadURLs,$root->[0]->[$i]->{'url'};
             	}
             	print " Success! ",$#downloadURLs + 1," files to download.\n";
-				my $name = $cidJSON->{"title"};
 				my $count = 1;
-				$name =~ /L{LETTER}/;
-				mkdir $name;
+				mkdir ${${$cidJSON}{list}}{0}->{cid};
 				foreach my $link (@downloadURLs) {
 					print " Downloading No.$count file...";
 					if (-e "${${$cidJSON}{list}}{0}->{cid}/$count.mp4") {
-						print "\n   \033[0m\033[37mExists $name/$count.mp4. Skip!\n\033[0m";
+						print "\n   \033[0m\033[37mExists ${${$cidJSON}{list}}{0}->{cid}/$count.mp4. Skip!\n\033[0m";
 						$count++;
 						next;
 					}
