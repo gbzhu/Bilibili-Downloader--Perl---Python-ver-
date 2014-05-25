@@ -59,7 +59,6 @@ if ( $ARGV[0] ){
             	my @durl = $playJSON->{durl};
             	my $root = \@durl;
             	my $i = 0;
-print Dumper(${$root}[0]);
             	my $count = $#{$root->[0]}+1;
             	for(;$i<$count;$i++){
                		push @downloadURLs,$root->[0]->[$i]->{'url'};
